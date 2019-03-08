@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <nav-menu></nav-menu>
+    <router-view></router-view>
+</div>
+
+<template id="page">
+    <div>
+        <h3>{{title}}</h3>
+    </div>
+</template>
+
+<template id="second">
+    <div>
+        <h3>{{tit}}</h3>
+    </div>
+</template>
+
+<template id="nav-menu">
+    <div>
+        <ul>
+            <li v-for="item of routes">
+                <router-link :to="item.path" >{{item.title}}</router-link>
+            </li>
+        </ul>'
+    </div>
+</template>
+
+
+
+<script type="application/javascript" src="./assets/js/vue/vue.js"></script>
+<script type="application/javascript" src="./assets/js/axios/axios.js"></script>
+<script type="application/javascript" src="./assets/js/vue-router/vue-router.js"></script>
+
+
+<script>
+
+    var firstComp =  Vue.component('page-main' , {
+        template : '#page',
+
+        data() {
+            return {
+                title : 'Vue inicio',
+            }
+        }
+
+    })
+
+    var secondComp = Vue.component('second-page' , {
+        template : '#second',
+
+        data(){
+            return {
+                tit : 'MEU SEGUNDO COMPONENT'
+            }
+        }
+    })
+
+    var navComp = Vue.component('nav-menu' , {
+        template : '#nav-menu',
+
+        data(){
+            return {
+                routes : router.options.routes,
+                menu : false
+            }
+        }
+    })
+
+    const router = new VueRouter({
+        mode : 'history',
+        routes : [
+            {path : '/' , component : firstComp , title : 'Home' },
+            {path : '/second' , component : secondComp, title : 'Second' }
+        ]
+    })
+
+    var app = new Vue({
+        el : '#app',
+        router
+    })
+
+
+
+</script>
+
+</body>
+</html>
