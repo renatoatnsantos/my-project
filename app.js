@@ -1,1 +1,2 @@
-const db = require('./db_conect')
+require('./db_conect')
+require('./server')
